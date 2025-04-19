@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <!-- Background Image or Gradient -->
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_background"
+        android:contentDescription="Background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Logo or Title -->
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_logo"
+            android:contentDescription="App Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Register to SmartWarehouse"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Form inside MaterialCardView -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Username Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/purple_500"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Username"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/purple_500"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/purple_500"
+                    app:hintTextColor="@color/purple_500"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Register Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Register"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/purple_500"
+                    app:cornerRadius="8dp"
+                    app:strokeColor="@color/purple_700"
+                    app:strokeWidth="1dp" />
+
+                <!-- Back to Login Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_back_to_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Back to Login"
+                    android:textColor="@color/purple_500"
+                    app:backgroundTint="@android:color/white"
+                    app:cornerRadius="8dp"
+                    app:strokeColor="@color/purple_500"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</RelativeLayout>

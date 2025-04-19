@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "563372672856",
+    "project_id": "smartwarehouse-8d974",
+    "storage_bucket": "smartwarehouse-8d974.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563372672856:android:6c00b9626913b397c2c72d",
+        "android_client_info": {
+          "package_name": "com.example.smartwarehouse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvOsvhLOEyY4KrH4OMITEZKrJ7PBGzi3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

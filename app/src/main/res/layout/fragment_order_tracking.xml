@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Tracking"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_scan_qr"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Scan QR Code"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pick_image"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="From Gallery"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/purple_500"
+            app:hintTextColor="@color/purple_500">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_so_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter SO Code"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search_so"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Search"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/table_order_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:stretchColumns="1"
+        android:visibility="gone">
+
+        <TableRow
+            android:background="#E0E0E0"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Field"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="SO Code"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_so_code"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Item Code"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_item_code"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Import Date"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_import_date"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Expected Export Date"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_expected_export_date"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Shelf ID"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_shelf_id"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

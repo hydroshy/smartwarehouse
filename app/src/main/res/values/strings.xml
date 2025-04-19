@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SmartWarehouse</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="brands_array">
+        <item>NIK</item>
+        <item>PUM</item>
+        <item>ADI</item>
+    </string-array>
+</resources>

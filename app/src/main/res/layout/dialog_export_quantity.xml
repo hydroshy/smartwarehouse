@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter quantity to export:"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:boxStrokeColor="@color/purple_500"
+        app:hintTextColor="@color/purple_500">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Quantity"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:gravity="end">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:minWidth="100dp"
+            android:text="Cancel"
+            android:textColor="@color/purple_500"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:text="Confirm"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+</LinearLayout>

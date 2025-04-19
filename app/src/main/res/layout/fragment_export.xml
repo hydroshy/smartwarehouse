@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export Item"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <!-- Nút quét QR và chọn ảnh -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_scan_qr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minWidth="150dp"
+            android:minHeight="48dp"
+            android:text="Scan QR Code"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginEnd="6dp"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pick_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minWidth="150dp"
+            android:minHeight="48dp"
+            android:text="From Gallery"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="6dp"
+            app:backgroundTint="@color/purple_500"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <!-- Bảng chi tiết sản phẩm -->
+    <TableLayout
+        android:id="@+id/table_product_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:stretchColumns="0,1,2,3,4"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:showDividers="middle"
+        android:visibility="gone">
+
+        <!-- Header Row -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E0E0E0"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="SO Code"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Item Code"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Import Date"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Exp. Export Date"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <!-- Data Row -->
+        <TableRow
+            android:id="@+id/row_product_details"
+            android:padding="12dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tv_so_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_item_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_import_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_expected_export_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </TableRow>
+    </TableLayout>
+
+    <!-- Nút Export Item -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_export"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Export Item"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/purple_500"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/purple_700"
+        app:strokeWidth="1dp"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_import"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Import" />
+    <item
+        android:id="@+id/nav_export"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="Export" />
+    <item
+        android:id="@+id/nav_order_tracking"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Tracking Package" />
+    <item
+        android:id="@+id/nav_warehouse"
+        android:icon="@android:drawable/ic_menu_slideshow"
+        android:title="Warehouse Management" />
+    <item
+        android:id="@+id/nav_export_history"
+        android:icon="@android:drawable/ic_media_previous"
+        android:title="Export History" />
+    <item
+        android:id="@+id/nav_manager"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Manager Settings" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="Logout" />
+</menu>

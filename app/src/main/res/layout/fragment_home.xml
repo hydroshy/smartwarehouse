@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart Warehouse"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tv_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Welcome, Guest (Employee)"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tv_warehouse_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Warehouse: Main Warehouse"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Shelves"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_total_shelves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shelves Near Full"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_shelves_near_full"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Brands"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_total_brands"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brands Low Stock"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_brands_low_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Items Near Deadline"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_items_near_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Items"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_total_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Imports Today"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_imports_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exports Today"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_exports_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
