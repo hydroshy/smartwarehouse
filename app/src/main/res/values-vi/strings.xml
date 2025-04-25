@@ -1,0 +1,134 @@
+<resources>
+
+    <string name="app_name">SmartWarehouse</string>
+    <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
+    <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
+    <string name="home">Trang chủ</string>
+    <string name="Import">Nhập hàng</string>
+    <string name="export">Xuất hàng</string>
+    <string name="tracking_package">Theo dõi đơn hàng</string>
+    <string name="warehouse_management">Quản lý kho</string>
+    <string name="export_history">Lịch sử xuất hàng</string>
+    <string name="manager">Quản lý nhân viên</string>
+    <string name="settings">Cài đặt</string>
+    <string name="manager_settings">Cài đặt quản lý</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="old_password">Mật khẩu cũ</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="confirm_new_password">Xác nhận mật khẩu mới</string>
+    <string name="no_internet_title">Lỗi mạng</string>
+    <string name="no_internet_message">Không có kết nối internet! Vui lòng kiểm tra mạng.</string>
+    <string name="dialog_ok">Đồng ý</string>
+    <string name="switch_language">Chuyển đổi ngôn ngữ</string>
+    <string name="language_dialog_title">Chọn ngôn ngữ</string>
+    <string name="language_english">Tiếng Anh</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
+    <!-- Chuỗi cho Home Fragment -->
+    <string name="smart_warehouse">SmartWarehouse</string>
+    <string name="welcome_message">Chào mừng, %s (Nhân viên)</string>
+    <string name="warehouse_name">Kho: %s</string>
+    <string name="total_shelves">Tổng số kệ</string>
+    <string name="shelves_near_full">Kệ gần đầy</string>
+    <string name="total_brands">Tổng số thương hiệu</string>
+    <string name="brands_low_stock">Thương hiệu sắp hết hàng</string>
+    <string name="items_near_deadline">Hàng gần hạn</string>
+    <string name="total_items">Tổng số hàng</string>
+    <string name="imports_today">Nhập hàng hôm nay</string>
+    <string name="exports_today">Xuất hàng hôm nay</string>
+    <string name="no_items_in_stock">Không có hàng trong kho để hiển thị</string>
+    <string name="failed_to_load_brands">Không thể tải thương hiệu: %s</string>
+    <!-- Chuỗi cho Import Fragment -->
+    <string name="import_item">Nhập hàng</string>
+    <string name="scan_qr_code">Quét mã QR</string>
+    <string name="so_code">Mã SO</string>
+    <string name="item_code">Mã hàng</string>
+    <string name="quantity">Số lượng</string>
+    <string name="expected_export_date">Ngày xuất dự kiến</string>
+    <string name="import_button">Nhập hàng</string>
+    <string name="save_qr_code">Lưu mã QR</string>
+    <string name="print_qr_code">In mã QR</string>
+    <string name="qr_code_content_description">Mã QR</string>
+    <string name="invalid_qr_code_format">Định dạng mã QR không hợp lệ</string>
+    <string name="please_fill_all_fields">Vui lòng điền đầy đủ và đúng thông tin</string>
+    <string name="item_updated_quantity">Hàng đã được cập nhật, số lượng: %d</string>
+    <string name="item_imported_to_shelf">Hàng đã được nhập vào %s</string>
+    <string name="failed_to_update_item">Không thể cập nhật hàng: %s</string>
+    <string name="failed_to_import_item">Không thể nhập hàng: %s</string>
+    <string name="no_available_shelf">Không tìm thấy kệ trống</string>
+    <string name="failed_to_generate_qr_code">Không thể tạo mã QR: %s</string>
+    <string name="no_qr_code_to_save">Không có mã QR để lưu</string>
+    <string name="qr_code_saved_to">Mã QR đã được lưu vào Pictures/SmartWarehouse/%s</string>
+    <string name="failed_to_create_media_store_uri">Không thể tạo URI MediaStore</string>
+    <string name="qr_code_saved_to_path">Mã QR đã được lưu vào %s</string>
+    <string name="failed_to_save_qr_code">Không thể lưu mã QR: %s</string>
+    <string name="failed_to_create_directory">Không thể tạo thư mục: %s</string>
+    <string name="printing_qr_code_mock">Đang in mã QR (giả lập)</string>
+    <string name="storage_permission_denied">Quyền truy cập bộ nhớ bị từ chối</string>
+    <!-- Chuỗi cho Export Fragment -->
+    <string name="export_item">Xuất hàng</string>
+    <string name="from_gallery">Từ thư viện</string>
+    <string name="import_date">Ngày nhập</string>
+    <string name="exp_export_date">Ngày xuất dự kiến</string>
+    <string name="failed_to_read_qr_code_from_image">Không thể đọc mã QR từ hình ảnh: %s</string>
+    <string name="item_not_found_or_out_of_stock">Không tìm thấy hàng hoặc đã hết hàng</string>
+    <string name="failed_to_load_item">Không thể tải hàng: %s</string>
+    <string name="please_enter_quantity">Vui lòng nhập số lượng</string>
+    <string name="invalid_quantity">Số lượng không hợp lệ</string>
+    <string name="export_quantity_exceeds_stock">Số lượng xuất vượt quá số lượng trong kho</string>
+    <string name="exported_units">Đã xuất %d đơn vị</string>
+    <string name="failed_to_export_item">Không thể xuất hàng: %s</string>
+    <string name="failed_to_save_export_history">Không thể lưu lịch sử xuất hàng: %s</string>
+    <string name="enter_quantity_to_export">Nhập số lượng để xuất:</string>
+    <string name="cancel">Hủy</string>
+    <string name="confirm">Xác nhận</string>
+    <!-- Chuỗi cho Order Tracking Fragment -->
+    <string name="order_tracking">Theo dõi đơn hàng</string>
+    <string name="enter_so_code">Nhập mã SO</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="field">Trường</string>
+    <string name="value">Giá trị</string>
+    <string name="shelf_id">Mã kệ</string>
+    <string name="please_enter_so_code">Vui lòng nhập mã SO</string>
+    <string name="order_not_found">Không tìm thấy đơn hàng</string>
+    <string name="failed_to_search_order">Không thể tìm kiếm đơn hàng: %s</string>
+    <string name="failed_to_load_order">Không thể tải đơn hàng: %s</string>
+    <!-- Chuỗi cho Shelves Fragment -->
+    <string name="shelves">Kệ hàng</string>
+    <string name="items_in_shelf">Hàng trong kệ</string>
+    <string name="normal_status">Bình thường</string>
+    <string name="full_status">Đầy</string>
+    <string name="near_full_status">Gần đầy</string>
+    <string name="so_code_label">Mã SO:</string>
+    <string name="import_date_label">Ngày nhập:</string>
+    <string name="export_date_label">Ngày xuất:</string>
+    <string name="quantity_label">Số lượng:</string>
+    <string name="not_available">Không có</string>
+    <string name="access_denied_message">Truy cập bị từ chối: Chỉ quản lý và nhân viên mới có quyền truy cập vào phần này.</string>
+    <string name="user_data_not_found">Không tìm thấy dữ liệu người dùng</string>
+    <string name="failed_to_load_user_role">Không thể tải vai trò người dùng: %s</string>
+    <string name="user_not_logged_in">Người dùng chưa đăng nhập</string>
+    <string name="failed_to_load_shelves">Không thể tải danh sách kệ: %s</string>
+    <string name="no_items_found_for_shelf">Không tìm thấy hàng trong kệ %s</string>
+    <string name="failed_to_load_items">Không thể tải danh sách hàng: %s</string>
+    <string name="items_in_shelf_with_number">Hàng trong kệ %s</string>
+    <!-- Chuỗi cho Export History Fragment -->
+    <string name="export_history_title">Lịch sử xuất hàng</string>
+    <string name="item_code_header">Mã hàng</string>
+    <string name="so_code_header">Mã SO</string>
+    <string name="export_date_header">Ngày xuất</string>
+    <string name="quantity_header">Số lượng</string>
+    <string name="google_play_services_not_available">Dịch vụ Google Play không khả dụng trên thiết bị này.</string>
+    <string name="device_does_not_support_google_play_services">Thiết bị này không hỗ trợ Dịch vụ Google Play</string>
+    <string name="no_exported_items_found">Không tìm thấy hàng đã xuất trong lịch sử xuất hàng</string>
+    <!-- Mảng ngôn ngữ -->
+    <string-array name="languages">
+        <item>@string/language_english</item>
+        <item>@string/language_vietnamese</item>
+    </string-array>
+    <string-array name="brands_array">
+        <item>NIK</item>
+        <item>PUM</item>
+        <item>ADI</item>
+    </string-array>
+</resources>
