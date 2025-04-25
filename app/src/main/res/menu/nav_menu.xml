@@ -3,33 +3,37 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/nav_import"
         android:icon="@android:drawable/ic_menu_camera"
-        android:title="Import" />
+        android:title="@string/Import" />
     <item
         android:id="@+id/nav_export"
         android:icon="@android:drawable/ic_menu_gallery"
-        android:title="Export" />
+        android:title="@string/export" />
     <item
         android:id="@+id/nav_order_tracking"
         android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="Tracking Package" />
+        android:title="@string/tracking_package" />
     <item
         android:id="@+id/nav_warehouse"
         android:icon="@android:drawable/ic_menu_slideshow"
-        android:title="Warehouse Management" />
+        android:title="@string/warehouse_management" />
     <item
         android:id="@+id/nav_export_history"
         android:icon="@android:drawable/ic_media_previous"
-        android:title="Export History" />
+        android:title="@string/export_history" />
     <item
         android:id="@+id/nav_manager"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="Manager Settings" />
+        android:title="@string/manager" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/settings" />
     <item
         android:id="@+id/nav_logout"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:title="Logout" />
+        android:title="@string/logout" />
 </menu>

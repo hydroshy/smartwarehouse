@@ -87,7 +87,7 @@ public class ImportFragment extends Fragment {
         btnScanQr.setOnClickListener(v -> {
             ScanOptions options = new ScanOptions();
             options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-            options.setPrompt("Scan QR Code");
+            options.setPrompt(getString(R.string.scan_qr_code)); // Thay hardcode "Scan QR Code"
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setBarcodeImageEnabled(true);
@@ -103,7 +103,7 @@ public class ImportFragment extends Fragment {
         btnSaveQr.setOnClickListener(v -> saveQrCode());
 
         // Print QR button (mock printing)
-        btnPrintQr.setOnClickListener(v -> Toast.makeText(requireContext(), "Printing QR Code (mock)", Toast.LENGTH_SHORT).show());
+        btnPrintQr.setOnClickListener(v -> Toast.makeText(requireContext(), getString(R.string.printing_qr_code_mock), Toast.LENGTH_SHORT).show());
 
         return view;
     }
@@ -165,7 +165,7 @@ public class ImportFragment extends Fragment {
                                     }
                                 });
                     } else {
-                        Toast.makeText(requireContext(), "Invalid QR code format", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.invalid_qr_code_format), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -193,7 +193,7 @@ public class ImportFragment extends Fragment {
         String exportDate = editExportDate.getText().toString().trim();
 
         if (soCode.isEmpty() || itemCode.length() != 11 || quantityStr.isEmpty() || exportDate.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill all fields correctly", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -229,10 +229,10 @@ public class ImportFragment extends Fragment {
                                 .update(updateData)
                                 .addOnSuccessListener(aVoid -> {
                                     lastImportedItemId = docId;
-                                    Toast.makeText(requireContext(), "Item updated, quantity: " + newQuantity, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), getString(R.string.item_updated_quantity, newQuantity), Toast.LENGTH_SHORT).show();
                                     generateAndShowQrCode(docId);
                                 })
-                                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to update item: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_update_item, e.getMessage()), Toast.LENGTH_SHORT).show());
                     } else {
                         // Create new item
                         Map<String, Object> item = new HashMap<>();
@@ -245,7 +245,7 @@ public class ImportFragment extends Fragment {
                         // Phân phối vào kệ phù hợp thay vì hard-coded shelf_1
                         selectShelf(shelfId -> {
                             if (shelfId == null) {
-                                Toast.makeText(requireContext(), "No available shelf found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), getString(R.string.no_available_shelf), Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
@@ -255,10 +255,10 @@ public class ImportFragment extends Fragment {
                             db.collection("items").add(item)
                                     .addOnSuccessListener(documentReference -> {
                                         lastImportedItemId = documentReference.getId();
-                                        Toast.makeText(requireContext(), "Item imported to " + shelfId, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), getString(R.string.item_imported_to_shelf, shelfId), Toast.LENGTH_SHORT).show();
                                         generateAndShowQrCode(lastImportedItemId);
                                     })
-                                    .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to import item: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_import_item, e.getMessage()), Toast.LENGTH_SHORT).show());
                         });
                     }
                 });
@@ -354,13 +354,13 @@ public class ImportFragment extends Fragment {
             imgQrCode.setVisibility(View.VISIBLE);
             qrActions.setVisibility(View.VISIBLE);
         } catch (WriterException e) {
-            Toast.makeText(requireContext(), "Failed to generate QR code: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.failed_to_generate_qr_code, e.getMessage()), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveQrCode() {
         if (lastQrBitmap == null) {
-            Toast.makeText(requireContext(), "No QR code to save", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.no_qr_code_to_save), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -385,9 +385,9 @@ public class ImportFragment extends Fragment {
                     values.put(MediaStore.Images.Media.IS_PENDING, 0);
                     requireContext().getContentResolver().update(uri, values, null, null);
 
-                    Toast.makeText(requireContext(), "QR code saved to Pictures/SmartWarehouse/" + fileName, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), getString(R.string.qr_code_saved_to, fileName), Toast.LENGTH_LONG).show();
                 } else {
-                    throw new Exception("Failed to create MediaStore URI");
+                    throw new Exception(getString(R.string.failed_to_create_media_store_uri));
                 }
             } else {
                 if (requireContext().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -397,7 +397,7 @@ public class ImportFragment extends Fragment {
 
                 File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "SmartWarehouse");
                 if (!directory.exists() && !directory.mkdirs()) {
-                    throw new Exception("Failed to create directory: " + directory.getAbsolutePath());
+                    throw new Exception(getString(R.string.failed_to_create_directory, directory.getAbsolutePath()));
                 }
 
                 File file = new File(directory, fileName);
@@ -409,14 +409,14 @@ public class ImportFragment extends Fragment {
                 mediaScanIntent.setData(android.net.Uri.fromFile(file));
                 requireContext().sendBroadcast(mediaScanIntent);
 
-                Toast.makeText(requireContext(), "QR code saved to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), getString(R.string.qr_code_saved_to_path, file.getAbsolutePath()), Toast.LENGTH_LONG).show();
             }
 
             imgQrCode.setVisibility(View.GONE);
             qrActions.setVisibility(View.GONE);
             lastQrBitmap = null;
         } catch (Exception e) {
-            Toast.makeText(requireContext(), "Failed to save QR code: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.failed_to_save_qr_code, e.getMessage()), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -426,7 +426,7 @@ public class ImportFragment extends Fragment {
         if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             saveQrCode();
         } else {
-            Toast.makeText(requireContext(), "Storage permission denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.storage_permission_denied), Toast.LENGTH_SHORT).show();
         }
     }
 }

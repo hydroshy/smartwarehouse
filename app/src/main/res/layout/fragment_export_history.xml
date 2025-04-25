@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Access Denied: Only managers and employees can access this section."
+        android:text="@string/access_denied_message"
         android:textColor="@color/red"
         android:textSize="16sp"
         android:visibility="gone" />
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Export History"
+            android:text="@string/export_history_title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
@@ -57,7 +57,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Item Code"
+                        android:text="@string/item_code_header"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -67,7 +67,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="SO Code"
+                        android:text="@string/so_code_header"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -77,7 +77,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Export Date"
+                        android:text="@string/export_date_header"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -87,7 +87,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Quantity"
+                        android:text="@string/quantity_header"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />

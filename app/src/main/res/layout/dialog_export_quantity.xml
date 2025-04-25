@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter quantity to export:"
+        android:text="@string/enter_quantity_to_export"
         android:textSize="16sp"
         android:textColor="@android:color/black" />
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Quantity"
+            android:hint="@string/quantity"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:minWidth="100dp"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="@color/purple_500"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="8dp"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="100dp"
-            android:text="Confirm"
+            android:text="@string/confirm"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/purple_500"
             app:cornerRadius="8dp"

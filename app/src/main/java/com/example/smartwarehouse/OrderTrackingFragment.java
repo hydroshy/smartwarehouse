@@ -52,7 +52,7 @@ public class OrderTrackingFragment extends Fragment {
         view.findViewById(R.id.btn_scan_qr).setOnClickListener(v -> {
             ScanOptions options = new ScanOptions();
             options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-            options.setPrompt("Scan QR Code");
+            options.setPrompt(getString(R.string.scan_qr_code));
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setOrientationLocked(true);
@@ -89,7 +89,7 @@ public class OrderTrackingFragment extends Fragment {
                         Result qrResult = reader.decode(binaryBitmap);
                         processQrCode(qrResult.getText());
                     } catch (Exception e) {
-                        Toast.makeText(requireContext(), "Failed to read QR code from image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.failed_to_read_qr_code_from_image, e.getMessage()), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -97,7 +97,7 @@ public class OrderTrackingFragment extends Fragment {
     private void processQrCode(String qrData) {
         String[] parts = qrData.split(":");
         if (parts.length != 5) {
-            Toast.makeText(requireContext(), "Invalid QR code format", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.invalid_qr_code_format), Toast.LENGTH_SHORT).show();
             tableOrderDetails.setVisibility(View.GONE);
             return;
         }
@@ -114,7 +114,7 @@ public class OrderTrackingFragment extends Fragment {
     private void searchOrderBySoCode() {
         String soCode = editSoCode.getText().toString().trim();
         if (soCode.isEmpty()) {
-            Toast.makeText(requireContext(), "Please enter an SO Code", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.please_enter_so_code), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -131,12 +131,12 @@ public class OrderTrackingFragment extends Fragment {
 
                         searchOrderInFirestore(soCode, itemCode, quantity, importDate, expectedExportDate);
                     } else {
-                        Toast.makeText(requireContext(), "Order not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.order_not_found), Toast.LENGTH_SHORT).show();
                         tableOrderDetails.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Failed to search order: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.failed_to_search_order, e.getMessage()), Toast.LENGTH_SHORT).show();
                     tableOrderDetails.setVisibility(View.GONE);
                 });
     }
@@ -160,12 +160,12 @@ public class OrderTrackingFragment extends Fragment {
 
                         tableOrderDetails.setVisibility(View.VISIBLE);
                     } else {
-                        Toast.makeText(requireContext(), "Order not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.order_not_found), Toast.LENGTH_SHORT).show();
                         tableOrderDetails.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Failed to load order: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.failed_to_load_order, e.getMessage()), Toast.LENGTH_SHORT).show();
                     tableOrderDetails.setVisibility(View.GONE);
                 });
     }

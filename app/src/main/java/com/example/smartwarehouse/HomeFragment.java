@@ -78,14 +78,14 @@ public class HomeFragment extends Fragment {
                         if (documentSnapshot.exists()) {
                             String username = documentSnapshot.getString("username");
                             String role = documentSnapshot.getString("role");
-                            tvUserInfo.setText("Welcome, " + username + " (" + role + ")");
+                            tvUserInfo.setText(getString(R.string.welcome_message, username));
                         } else {
-                            tvUserInfo.setText("Welcome, Guest (Employee)");
+                            tvUserInfo.setText(getString(R.string.welcome_message, "Guest"));
                         }
                     })
-                    .addOnFailureListener(e -> tvUserInfo.setText("Welcome, Guest (Employee)"));
+                    .addOnFailureListener(e -> tvUserInfo.setText(getString(R.string.welcome_message, "Guest")));
         } else {
-            tvUserInfo.setText("Welcome, Guest (Employee)");
+            tvUserInfo.setText(getString(R.string.welcome_message, "Guest"));
         }
     }
 
@@ -97,9 +97,9 @@ public class HomeFragment extends Fragment {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String name = documentSnapshot.getString("name");
-                        tvWarehouseName.setText("Warehouse: " + (name != null ? name : "Main Warehouse"));
+                        tvWarehouseName.setText(getString(R.string.warehouse_name, name != null ? name : "Main Warehouse"));
                     } else {
-                        tvWarehouseName.setText("Warehouse: Main Warehouse");
+                        tvWarehouseName.setText(getString(R.string.warehouse_name, "Main Warehouse"));
                     }
                 });
 
@@ -312,7 +312,7 @@ public class HomeFragment extends Fragment {
                                 }
 
                                 if (entries.isEmpty()) {
-                                    Toast.makeText(requireContext(), "No items in stock to display", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), getString(R.string.no_items_in_stock), Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -341,6 +341,6 @@ public class HomeFragment extends Fragment {
                                 pieChart.invalidate();
                             });
                 })
-                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to load brands: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_load_brands, e.getMessage()), Toast.LENGTH_SHORT).show());
     }
 }

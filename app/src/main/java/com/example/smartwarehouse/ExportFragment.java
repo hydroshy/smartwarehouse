@@ -63,7 +63,7 @@ public class ExportFragment extends Fragment {
                         Result qrResult = reader.decode(binaryBitmap);
                         processQrCode(qrResult.getText());
                     } catch (Exception e) {
-                        Toast.makeText(requireContext(), "Failed to read QR code from image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.failed_to_read_qr_code_from_image, e.getMessage()), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -86,12 +86,12 @@ public class ExportFragment extends Fragment {
         btnScanQr.setOnClickListener(v -> {
             ScanOptions options = new ScanOptions();
             options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-            options.setPrompt("Scan QR Code");
+            options.setPrompt(getString(R.string.scan_qr_code));
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setOrientationLocked(true);
             options.setBarcodeImageEnabled(true);
-            options.setCaptureActivity(CustomCaptureActivity.class); // Sử dụng CustomCaptureActivity để khóa hướng
+            options.setCaptureActivity(CustomCaptureActivity.class);
             barcodeLauncher.launch(options);
         });
 
@@ -115,7 +115,7 @@ public class ExportFragment extends Fragment {
             soCode = parts[0];
             itemCode = parts[1];
         } else {
-            Toast.makeText(requireContext(), "Invalid QR code format", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.invalid_qr_code_format), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -141,13 +141,13 @@ public class ExportFragment extends Fragment {
                         tableProductDetails.setVisibility(View.VISIBLE);
                         btnExport.setVisibility(View.VISIBLE);
                     } else {
-                        Toast.makeText(requireContext(), "Item not found or out of stock", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.item_not_found_or_out_of_stock), Toast.LENGTH_SHORT).show();
                         tableProductDetails.setVisibility(View.GONE);
                         btnExport.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Failed to load item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.failed_to_load_item, e.getMessage()), Toast.LENGTH_SHORT).show();
                     tableProductDetails.setVisibility(View.GONE);
                     btnExport.setVisibility(View.GONE);
                 });
@@ -161,7 +161,7 @@ public class ExportFragment extends Fragment {
 
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setView(dialogView)
-                .setTitle("Export Item")
+                .setTitle(R.string.export_item)
                 .create();
 
         btnCancel.setOnClickListener(v -> dialog.dismiss());
@@ -169,13 +169,13 @@ public class ExportFragment extends Fragment {
         btnConfirm.setOnClickListener(v -> {
             String quantityStr = editQuantity.getText().toString().trim();
             if (quantityStr.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter quantity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.please_enter_quantity), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             int exportQuantity = Integer.parseInt(quantityStr);
             if (exportQuantity <= 0) {
-                Toast.makeText(requireContext(), "Invalid quantity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.invalid_quantity), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -191,7 +191,7 @@ public class ExportFragment extends Fragment {
                             long currentQuantity = doc.getLong("quantity");
 
                             if (exportQuantity > currentQuantity) {
-                                Toast.makeText(requireContext(), "Export quantity exceeds available stock", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), getString(R.string.export_quantity_exceeds_stock), Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
@@ -213,14 +213,14 @@ public class ExportFragment extends Fragment {
 
                                         db.collection("export_history").add(history)
                                                 .addOnSuccessListener(docRef -> {
-                                                    Toast.makeText(requireContext(), "Exported " + exportQuantity + " units", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(requireContext(), getString(R.string.exported_units, exportQuantity), Toast.LENGTH_SHORT).show();
                                                     tableProductDetails.setVisibility(View.GONE);
                                                     btnExport.setVisibility(View.GONE);
                                                     dialog.dismiss();
                                                 })
-                                                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to save export history: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_save_export_history, e.getMessage()), Toast.LENGTH_SHORT).show());
                                     })
-                                    .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to export item: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_export_item, e.getMessage()), Toast.LENGTH_SHORT).show());
                         }
                     });
         });

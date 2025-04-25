@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Tracking"
+        android:text="@string/order_tracking"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black" />
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Scan QR Code"
+            android:text="@string/scan_qr_code"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/purple_500"
             app:cornerRadius="8dp"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="From Gallery"
+            android:text="@string/from_gallery"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/purple_500"
             app:cornerRadius="8dp"
@@ -65,7 +65,7 @@
                 android:id="@+id/edit_so_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter SO Code"
+                android:hint="@string/enter_so_code"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Search"
+            android:text="@string/search"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/purple_500"
             app:cornerRadius="8dp"
@@ -100,7 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Field"
+                android:text="@string/field"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
@@ -109,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Value"
+                android:text="@string/value"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
@@ -122,7 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="SO Code"
+                android:text="@string/so_code"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
@@ -143,7 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Item Code"
+                android:text="@string/item_code"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
@@ -164,7 +164,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
@@ -185,7 +185,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Import Date"
+                android:text="@string/import_date"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
@@ -206,7 +206,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Expected Export Date"
+                android:text="@string/expected_export_date"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
@@ -227,7 +227,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Shelf ID"
+                android:text="@string/shelf_id"
                 android:textSize="14sp"
                 android:textColor="@android:color/black" />
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Access Denied: Only managers and employees can access this section."
+        android:text="@string/access_denied_message"
         android:textColor="@color/red"
         android:textSize="16sp"
         android:visibility="gone" />
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shelves"
+            android:text="@string/shelves"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Items in Shelf"
+            android:text="@string/items_in_shelf"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"

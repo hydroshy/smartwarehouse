@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Import Item"
+        android:text="@string/import_item"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black" />
@@ -32,7 +32,7 @@
                 android:id="@+id/btn_scan_qr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Scan QR Code"
+                android:text="@string/scan_qr_code"
                 android:textColor="@android:color/white"
                 app:backgroundTint="@color/purple_500"
                 app:cornerRadius="8dp"
@@ -53,7 +53,7 @@
                     android:id="@+id/edit_so_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="SO Code"
+                    android:hint="@string/so_code"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +84,7 @@
                     android:id="@+id/edit_item_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Item Code"
+                    android:hint="@string/item_code"
                     android:inputType="number"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -101,7 +101,7 @@
                     android:id="@+id/edit_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Quantity"
+                    android:hint="@string/quantity"
                     android:inputType="number"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -118,7 +118,7 @@
                     android:id="@+id/edit_export_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Expected Export Date"
+                    android:hint="@string/expected_export_date"
                     android:inputType="date"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Import"
+                android:text="@string/import_button"
                 android:textColor="@android:color/white"
                 app:backgroundTint="@color/purple_500"
                 app:cornerRadius="8dp"
@@ -161,7 +161,7 @@
                 android:id="@+id/img_qr_code"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:contentDescription="QR Code" />
+                android:contentDescription="@string/qr_code_content_description" />
 
             <LinearLayout
                 android:id="@+id/qr_actions"
@@ -176,7 +176,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Save QR Code"
+                    android:text="@string/save_qr_code"
                     android:textColor="@android:color/white"
                     app:backgroundTint="@color/purple_500"
                     app:cornerRadius="8dp"
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Print QR Code"
+                    android:text="@string/print_qr_code"
                     android:textColor="@android:color/white"
                     app:backgroundTint="@color/purple_500"
                     app:cornerRadius="8dp"

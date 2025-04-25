@@ -63,10 +63,10 @@ public class WarehouseManagementFragment extends Fragment {
                 TextView tvQuantity = view.findViewById(R.id.tv_quantity);
 
                 tvItemCode.setText(item.getItemCode());
-                tvSoCode.setText("SO Code: " + (item.getSoCode() != null ? item.getSoCode() : "N/A"));
-                tvImportDate.setText("Import Date: " + (item.getImportDate() != null ? item.getImportDate() : "N/A"));
-                tvExpectedExportDate.setText("Export Date: " + (item.getExpectedExportDate() != null ? item.getExpectedExportDate() : "N/A"));
-                tvQuantity.setText("Quantity: " + item.getQuantity());
+                tvSoCode.setText(getString(R.string.so_code_label) + " " + (item.getSoCode() != null ? item.getSoCode() : getString(R.string.not_available)));
+                tvImportDate.setText(getString(R.string.import_date_label) + " " + (item.getImportDate() != null ? item.getImportDate() : getString(R.string.not_available)));
+                tvExpectedExportDate.setText(getString(R.string.export_date_label) + " " + (item.getExpectedExportDate() != null ? item.getExpectedExportDate() : getString(R.string.not_available)));
+                tvQuantity.setText(getString(R.string.quantity_label) + " " + item.getQuantity());
 
                 return view;
             }
@@ -96,18 +96,18 @@ public class WarehouseManagementFragment extends Fragment {
                         } else {
                             layoutContent.setVisibility(View.GONE);
                             tvAccessDenied.setVisibility(View.VISIBLE);
-                            Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), getString(R.string.user_data_not_found), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
                         layoutContent.setVisibility(View.GONE);
                         tvAccessDenied.setVisibility(View.VISIBLE);
-                        Toast.makeText(requireContext(), "Failed to load user role: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.failed_to_load_user_role, e.getMessage()), Toast.LENGTH_SHORT).show();
                     });
         } else {
             layoutContent.setVisibility(View.GONE);
             tvAccessDenied.setVisibility(View.VISIBLE);
-            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.user_not_logged_in), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,7 +137,7 @@ public class WarehouseManagementFragment extends Fragment {
                         }
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to load shelves: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_load_shelves, e.getMessage()), Toast.LENGTH_SHORT).show());
     }
 
     private void calculateShelfQuantity(String shelfNumber, ShelfDataCallback callback) {
@@ -201,17 +201,19 @@ public class WarehouseManagementFragment extends Fragment {
 
             // Hiển thị trạng thái
             String status;
+            int statusColor;
             if (shelf.getCurrentQuantity() == 100) {
-                status = "Full";
-                tvShelfStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                status = getString(R.string.full_status);
+                statusColor = getResources().getColor(android.R.color.holo_red_dark);
             } else if (shelf.getCurrentQuantity() >= 80) {
-                status = "Near Full";
-                tvShelfStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
+                status = getString(R.string.near_full_status);
+                statusColor = getResources().getColor(android.R.color.holo_orange_dark);
             } else {
-                status = "Normal";
-                tvShelfStatus.setTextColor(getResources().getColor(android.R.color.black));
+                status = getString(R.string.normal_status);
+                statusColor = getResources().getColor(android.R.color.black);
             }
             tvShelfStatus.setText(status);
+            tvShelfStatus.setTextColor(statusColor);
 
             // Hiển thị ngày xuất kho sớm nhất
             tvExpectedExportDate.setText(shelf.getEarliestExpectedExportDate());
@@ -244,14 +246,14 @@ public class WarehouseManagementFragment extends Fragment {
                     if (items.isEmpty()) {
                         tvItemsTitle.setVisibility(View.GONE);
                         listItems.setVisibility(View.GONE);
-                        Toast.makeText(requireContext(), "No items found for shelf " + shelfNumber, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.no_items_found_for_shelf, shelfNumber), Toast.LENGTH_SHORT).show();
                     } else {
-                        tvItemsTitle.setText("Items in Shelf " + shelfNumber);
+                        tvItemsTitle.setText(getString(R.string.items_in_shelf_with_number, shelfNumber));
                         tvItemsTitle.setVisibility(View.VISIBLE);
                         listItems.setVisibility(View.VISIBLE);
                         itemAdapter.notifyDataSetChanged();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Failed to load items: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_load_items, e.getMessage()), Toast.LENGTH_SHORT).show());
     }
 }

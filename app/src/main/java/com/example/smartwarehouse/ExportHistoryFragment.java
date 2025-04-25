@@ -45,7 +45,7 @@ public class ExportHistoryFragment extends Fragment {
         } else {
             layoutContent.setVisibility(View.GONE);
             tvAccessDenied.setVisibility(View.VISIBLE);
-            tvAccessDenied.setText("Google Play Services is not available on this device.");
+            tvAccessDenied.setText(getString(R.string.google_play_services_not_available));
         }
 
         return view;
@@ -58,7 +58,7 @@ public class ExportHistoryFragment extends Fragment {
             if (googleApiAvailability.isUserResolvableError(resultCode)) {
                 googleApiAvailability.getErrorDialog(requireActivity(), resultCode, 9000).show();
             } else {
-                Toast.makeText(requireContext(), "This device does not support Google Play Services", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), getString(R.string.device_does_not_support_google_play_services), Toast.LENGTH_LONG).show();
             }
             return false;
         }
@@ -83,18 +83,18 @@ public class ExportHistoryFragment extends Fragment {
                         } else {
                             layoutContent.setVisibility(View.GONE);
                             tvAccessDenied.setVisibility(View.VISIBLE);
-                            Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), getString(R.string.user_data_not_found), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
                         layoutContent.setVisibility(View.GONE);
                         tvAccessDenied.setVisibility(View.VISIBLE);
-                        Toast.makeText(requireContext(), "Failed to load user role: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.failed_to_load_user_role, e.getMessage()), Toast.LENGTH_SHORT).show();
                     });
         } else {
             layoutContent.setVisibility(View.GONE);
             tvAccessDenied.setVisibility(View.VISIBLE);
-            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.user_not_logged_in), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -113,13 +113,13 @@ public class ExportHistoryFragment extends Fragment {
                         }
                     }
                     if (items.isEmpty()) {
-                        Toast.makeText(requireContext(), "No exported items found in export_history", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.no_exported_items_found), Toast.LENGTH_SHORT).show();
                     } else {
                         displayExportHistory();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Failed to load export history: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.failed_to_save_export_history, e.getMessage()), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -151,14 +151,14 @@ public class ExportHistoryFragment extends Fragment {
 
             TextView tvSoCode = new TextView(requireContext());
             tvSoCode.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            tvSoCode.setText(item.getSoCode() != null ? item.getSoCode() : "N/A");
+            tvSoCode.setText(item.getSoCode() != null ? item.getSoCode() : getString(R.string.not_available));
             tvSoCode.setTextSize(14);
             tvSoCode.setTextColor(getResources().getColor(android.R.color.black));
             tvSoCode.setPadding(0, 0, 8, 0);
 
             TextView tvExportDate = new TextView(requireContext());
             tvExportDate.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            tvExportDate.setText(item.getExpectedExportDate() != null ? item.getExpectedExportDate() : "N/A");
+            tvExportDate.setText(item.getExpectedExportDate() != null ? item.getExpectedExportDate() : getString(R.string.not_available));
             tvExportDate.setTextSize(14);
             tvExportDate.setTextColor(getResources().getColor(android.R.color.black));
             tvExportDate.setPadding(0, 0, 8, 0);
