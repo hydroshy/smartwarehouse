@@ -17,7 +17,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="16dp">
-
+        <Button
+            android:id="@+id/switchLanguageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/switch_language"
+            android:backgroundTint="#FF6200EE"
+            android:textColor="#FFFFFF" />
         <Button
             android:id="@+id/changePasswordButton"
             android:layout_width="match_parent"
@@ -36,14 +43,7 @@
             android:backgroundTint="#FF6200EE"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/switchLanguageButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/switch_language"
-            android:backgroundTint="#FF6200EE"
-            android:textColor="#FFFFFF" />
+
 
     </LinearLayout>
 

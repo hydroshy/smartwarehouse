@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ImportFragment extends Fragment {
+    private static final String TAG = "ImportFragment";
     private FirebaseFirestore db;
     private EditText editSoCode, editItemCode, editQuantity, editExportDate;
     private Spinner spinnerBrand;
@@ -56,6 +57,8 @@ public class ImportFragment extends Fragment {
     private Bitmap lastQrBitmap;
     private String lastSoCode, lastItemCode, lastQuantity, lastImportDate, lastExportDate;
     private static final int SHELF_CAPACITY = 100; // Giới hạn của mỗi kệ là 100 items
+    private ArrayAdapter<String> brandAdapter;
+    private List<String> brandList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,20 +77,17 @@ public class ImportFragment extends Fragment {
         imgQrCode = view.findViewById(R.id.img_qr_code);
         qrActions = view.findViewById(R.id.qr_actions);
 
-        // Setup brand spinner
-        ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_spinner_item, Arrays.asList("NIK", "PUM", "ADI"));
-        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBrand.setAdapter(brandAdapter);
+        // Thiết lập Spinner cho thương hiệu từ Firestore
+        setupBrandSpinner();
 
-        // Setup date picker
+        // Thiết lập DatePicker
         editExportDate.setOnClickListener(v -> showDatePickerDialog());
 
-        // Setup QR scan
+        // Thiết lập quét mã QR
         btnScanQr.setOnClickListener(v -> {
             ScanOptions options = new ScanOptions();
             options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-            options.setPrompt(getString(R.string.scan_qr_code)); // Thay hardcode "Scan QR Code"
+            options.setPrompt("Scan QR Code");
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setBarcodeImageEnabled(true);
@@ -96,19 +96,51 @@ public class ImportFragment extends Fragment {
             barcodeLauncher.launch(options);
         });
 
-        // Import button
+        // Nút nhập hàng
         btnImport.setOnClickListener(v -> importItem());
 
-        // Save QR button
+        // Nút lưu mã QR
         btnSaveQr.setOnClickListener(v -> saveQrCode());
 
-        // Print QR button (mock printing)
-        btnPrintQr.setOnClickListener(v -> Toast.makeText(requireContext(), getString(R.string.printing_qr_code_mock), Toast.LENGTH_SHORT).show());
+        // Nút in mã QR (mock)
+        btnPrintQr.setOnClickListener(v -> Toast.makeText(requireContext(), "Printing QR Code (mock)", Toast.LENGTH_SHORT).show());
 
         return view;
     }
 
-    // Register the launcher for barcode scanning
+    // Thiết lập Spinner cho thương hiệu từ Firestore
+    private void setupBrandSpinner() {
+        brandList = new ArrayList<>();
+        brandAdapter = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_item, brandList);
+        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBrand.setAdapter(brandAdapter);
+
+        // Lắng nghe thay đổi thời gian thực từ Firestore
+        db.collection("brands").addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Lỗi tải thương hiệu: " + e.getMessage());
+                Toast.makeText(requireContext(), "Lỗi tải thương hiệu: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            brandList.clear();
+            if (queryDocumentSnapshots != null) {
+                for (var doc : queryDocumentSnapshots) {
+                    String brandCode = doc.getString("brand_code");
+                    if (brandCode != null) {
+                        brandList.add(brandCode);
+                    }
+                }
+            }
+            brandAdapter.notifyDataSetChanged();
+            if (brandList.isEmpty()) {
+                Toast.makeText(requireContext(), "Không có thương hiệu nào!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Đăng ký launcher cho quét mã QR
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
                 if (result.getContents() != null) {
@@ -125,7 +157,9 @@ public class ImportFragment extends Fragment {
                         editItemCode.setText(itemCode.length() >= 3 ? itemCode.substring(3) : itemCode);
                         editQuantity.setText(quantity);
                         editExportDate.setText(expectedExportDate);
-                        spinnerBrand.setSelection(Arrays.asList("NIK", "PUM", "ADI").indexOf(itemCode.length() >= 3 ? itemCode.substring(0, 3) : "NIK"));
+                        String brand = itemCode.length() >= 3 ? itemCode.substring(0, 3) : "";
+                        int brandIndex = brandList.indexOf(brand);
+                        spinnerBrand.setSelection(brandIndex != -1 ? brandIndex : 0);
 
                         db.collection("items")
                                 .whereEqualTo("SO_code", soCode)
@@ -147,7 +181,9 @@ public class ImportFragment extends Fragment {
                         String itemCode = parts[1];
                         editSoCode.setText(soCode);
                         editItemCode.setText(itemCode.length() >= 3 ? itemCode.substring(3) : itemCode);
-                        spinnerBrand.setSelection(Arrays.asList("NIK", "PUM", "ADI").indexOf(itemCode.length() >= 3 ? itemCode.substring(0, 3) : "NIK"));
+                        String brand = itemCode.length() >= 3 ? itemCode.substring(0, 3) : "";
+                        int brandIndex = brandList.indexOf(brand);
+                        spinnerBrand.setSelection(brandIndex != -1 ? brandIndex : 0);
 
                         db.collection("items")
                                 .whereEqualTo("SO_code", soCode)
@@ -165,7 +201,7 @@ public class ImportFragment extends Fragment {
                                     }
                                 });
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.invalid_qr_code_format), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Invalid QR code format", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -187,17 +223,25 @@ public class ImportFragment extends Fragment {
 
     private void importItem() {
         String soCode = editSoCode.getText().toString().trim();
-        String brand = spinnerBrand.getSelectedItem().toString();
+        String brand = spinnerBrand.getSelectedItem() != null ? spinnerBrand.getSelectedItem().toString() : "";
         String itemCode = brand + editItemCode.getText().toString().trim();
         String quantityStr = editQuantity.getText().toString().trim();
         String exportDate = editExportDate.getText().toString().trim();
 
-        if (soCode.isEmpty() || itemCode.length() != 11 || quantityStr.isEmpty() || exportDate.isEmpty()) {
-            Toast.makeText(requireContext(), getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show();
+        if (soCode.isEmpty() || itemCode.length() != 11 || quantityStr.isEmpty() || exportDate.isEmpty() || brand.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill all fields correctly", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Kiểm tra đầu vào thất bại: soCode=" + soCode + ", itemCode=" + itemCode + ", quantity=" + quantityStr + ", exportDate=" + exportDate + ", brand=" + brand);
             return;
         }
 
-        int quantity = Integer.parseInt(quantityStr);
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(requireContext(), "Invalid quantity format", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Lỗi parse quantity: " + e.getMessage());
+            return;
+        }
 
         // Lưu thông tin để tạo mã QR
         lastSoCode = soCode;
@@ -206,14 +250,16 @@ public class ImportFragment extends Fragment {
         lastImportDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         lastExportDate = exportDate;
 
-        // Check if item exists
+        Log.d(TAG, "Chuẩn bị nhập hàng: soCode=" + lastSoCode + ", itemCode=" + lastItemCode + ", quantity=" + lastQuantity + ", importDate=" + lastImportDate + ", exportDate=" + lastExportDate);
+
+        // Kiểm tra xem mặt hàng đã tồn tại chưa
         db.collection("items")
                 .whereEqualTo("SO_code", soCode)
                 .whereEqualTo("item_code", itemCode)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
-                        // Update existing item
+                        // Cập nhật mặt hàng hiện có
                         var doc = queryDocumentSnapshots.getDocuments().get(0);
                         String docId = doc.getId();
                         long currentQuantity = doc.getLong("quantity");
@@ -229,12 +275,16 @@ public class ImportFragment extends Fragment {
                                 .update(updateData)
                                 .addOnSuccessListener(aVoid -> {
                                     lastImportedItemId = docId;
-                                    Toast.makeText(requireContext(), getString(R.string.item_updated_quantity, newQuantity), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), "Item updated, quantity: " + newQuantity, Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "Cập nhật mặt hàng thành công, gọi generateAndShowQrCode");
                                     generateAndShowQrCode(docId);
                                 })
-                                .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_update_item, e.getMessage()), Toast.LENGTH_SHORT).show());
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(requireContext(), "Failed to update item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "Lỗi cập nhật mặt hàng: " + e.getMessage());
+                                });
                     } else {
-                        // Create new item
+                        // Tạo mặt hàng mới
                         Map<String, Object> item = new HashMap<>();
                         item.put("SO_code", soCode);
                         item.put("item_code", itemCode);
@@ -242,10 +292,11 @@ public class ImportFragment extends Fragment {
                         item.put("expected_export_date", exportDate);
                         item.put("quantity", quantity);
 
-                        // Phân phối vào kệ phù hợp thay vì hard-coded shelf_1
+                        // Phân phối vào kệ phù hợp
                         selectShelf(shelfId -> {
                             if (shelfId == null) {
-                                Toast.makeText(requireContext(), getString(R.string.no_available_shelf), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), "No available shelf found", Toast.LENGTH_SHORT).show();
+                                Log.w(TAG, "Không tìm thấy kệ trống");
                                 return;
                             }
 
@@ -255,12 +306,20 @@ public class ImportFragment extends Fragment {
                             db.collection("items").add(item)
                                     .addOnSuccessListener(documentReference -> {
                                         lastImportedItemId = documentReference.getId();
-                                        Toast.makeText(requireContext(), getString(R.string.item_imported_to_shelf, shelfId), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "Item imported to " + shelfId, Toast.LENGTH_SHORT).show();
+                                        Log.d(TAG, "Tạo mặt hàng mới thành công, gọi generateAndShowQrCode");
                                         generateAndShowQrCode(lastImportedItemId);
                                     })
-                                    .addOnFailureListener(e -> Toast.makeText(requireContext(), getString(R.string.failed_to_import_item, e.getMessage()), Toast.LENGTH_SHORT).show());
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(requireContext(), "Failed to import item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e(TAG, "Lỗi tạo mặt hàng mới: " + e.getMessage());
+                                    });
                         });
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Failed to check item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Lỗi truy vấn items: " + e.getMessage());
                 });
     }
 
@@ -270,6 +329,7 @@ public class ImportFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
                         callback.onShelfSelected(null);
+                        Log.w(TAG, "Không có kệ nào trong Firestore");
                         return;
                     }
 
@@ -283,6 +343,7 @@ public class ImportFragment extends Fragment {
 
                     if (shelfIds.isEmpty()) {
                         callback.onShelfSelected(null);
+                        Log.w(TAG, "Danh sách shelfIds rỗng");
                         return;
                     }
 
@@ -319,16 +380,21 @@ public class ImportFragment extends Fragment {
                                         }
 
                                         callback.onShelfSelected(selectedShelf);
+                                        Log.d(TAG, "Kệ được chọn: " + selectedShelf);
                                     }
                                 })
                                 .addOnFailureListener(e -> {
                                     if (pendingQueries.decrementAndGet() == 0) {
                                         callback.onShelfSelected(null);
+                                        Log.e(TAG, "Lỗi truy vấn items cho kệ: " + e.getMessage());
                                     }
                                 });
                     }
                 })
-                .addOnFailureListener(e -> callback.onShelfSelected(null));
+                .addOnFailureListener(e -> {
+                    callback.onShelfSelected(null);
+                    Log.e(TAG, "Lỗi truy vấn shelves: " + e.getMessage());
+                });
     }
 
     // Callback để trả về kệ được chọn
@@ -336,9 +402,19 @@ public class ImportFragment extends Fragment {
         void onShelfSelected(String shelfId);
     }
 
+    // Tạo và hiển thị mã QR
     private void generateAndShowQrCode(String itemId) {
+        Log.d(TAG, "Bắt đầu tạo mã QR cho itemId: " + itemId);
         String qrContent = String.format("%s:%s:%s:%s:%s",
                 lastSoCode, lastItemCode, lastQuantity, lastImportDate, lastExportDate);
+        Log.d(TAG, "Nội dung QR: " + qrContent);
+
+        if (lastSoCode == null || lastItemCode == null || lastQuantity == null || lastImportDate == null || lastExportDate == null) {
+            Toast.makeText(requireContext(), "Dữ liệu QR không hợp lệ!", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Dữ liệu QR null: soCode=" + lastSoCode + ", itemCode=" + lastItemCode + ", quantity=" + lastQuantity +
+                    ", importDate=" + lastImportDate + ", exportDate=" + lastExportDate);
+            return;
+        }
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
@@ -353,14 +429,22 @@ public class ImportFragment extends Fragment {
             imgQrCode.setImageBitmap(lastQrBitmap);
             imgQrCode.setVisibility(View.VISIBLE);
             qrActions.setVisibility(View.VISIBLE);
+            View cardQrCode = getView().findViewById(R.id.card_qr_code);
+            if (cardQrCode != null) {
+                cardQrCode.setVisibility(View.VISIBLE);
+            }
+            Toast.makeText(requireContext(), "Mã QR đã được tạo!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Mã QR được tạo và hiển thị thành công");
         } catch (WriterException e) {
-            Toast.makeText(requireContext(), getString(R.string.failed_to_generate_qr_code, e.getMessage()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Failed to generate QR code: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Lỗi tạo mã QR: " + e.getMessage());
         }
     }
 
     private void saveQrCode() {
         if (lastQrBitmap == null) {
-            Toast.makeText(requireContext(), getString(R.string.no_qr_code_to_save), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "No QR code to save", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Không có mã QR để lưu");
             return;
         }
 
@@ -385,19 +469,21 @@ public class ImportFragment extends Fragment {
                     values.put(MediaStore.Images.Media.IS_PENDING, 0);
                     requireContext().getContentResolver().update(uri, values, null, null);
 
-                    Toast.makeText(requireContext(), getString(R.string.qr_code_saved_to, fileName), Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), "QR code saved to Pictures/SmartWarehouse/" + fileName, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "Mã QR lưu thành công tại: " + fileName);
                 } else {
-                    throw new Exception(getString(R.string.failed_to_create_media_store_uri));
+                    throw new Exception("Failed to create MediaStore URI");
                 }
             } else {
                 if (requireContext().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+                    Log.d(TAG, "Yêu cầu quyền WRITE_EXTERNAL_STORAGE");
                     return;
                 }
 
                 File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "SmartWarehouse");
                 if (!directory.exists() && !directory.mkdirs()) {
-                    throw new Exception(getString(R.string.failed_to_create_directory, directory.getAbsolutePath()));
+                    throw new Exception("Failed to create directory: " + directory.getAbsolutePath());
                 }
 
                 File file = new File(directory, fileName);
@@ -409,14 +495,20 @@ public class ImportFragment extends Fragment {
                 mediaScanIntent.setData(android.net.Uri.fromFile(file));
                 requireContext().sendBroadcast(mediaScanIntent);
 
-                Toast.makeText(requireContext(), getString(R.string.qr_code_saved_to_path, file.getAbsolutePath()), Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "QR code saved to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Mã QR lưu thành công tại: " + file.getAbsolutePath());
             }
 
             imgQrCode.setVisibility(View.GONE);
             qrActions.setVisibility(View.GONE);
+            View cardQrCode = getView().findViewById(R.id.card_qr_code);
+            if (cardQrCode != null) {
+                cardQrCode.setVisibility(View.GONE);
+            }
             lastQrBitmap = null;
         } catch (Exception e) {
-            Toast.makeText(requireContext(), getString(R.string.failed_to_save_qr_code, e.getMessage()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Failed to save QR code: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Lỗi lưu mã QR: " + e.getMessage());
         }
     }
 
@@ -425,8 +517,10 @@ public class ImportFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             saveQrCode();
+            Log.d(TAG, "Quyền WRITE_EXTERNAL_STORAGE được cấp, thử lưu mã QR lại");
         } else {
-            Toast.makeText(requireContext(), getString(R.string.storage_permission_denied), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Storage permission denied", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Quyền WRITE_EXTERNAL_STORAGE bị từ chối");
         }
     }
 }
